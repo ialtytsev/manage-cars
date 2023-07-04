@@ -21,17 +21,6 @@ const EditForm = ({ theCar }) => {
 
   const { updateCar } = useContext(CarContext);
 
-  const updatedCar = {
-    id,
-    car,
-    car_model,
-    car_vin,
-    car_color,
-    car_model_year,
-    price,
-    availability,
-  };
-
   const handleColorChange = (e) => {
     const color = e.target.value;
     const capitalizedColor = color.charAt(0).toUpperCase() + color.slice(1);
@@ -40,6 +29,21 @@ const EditForm = ({ theCar }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const formattedPrice = /^\d+$/.test(price)
+      ? parseFloat(price).toFixed(2)
+      : price;
+
+    const updatedCar = {
+        id,
+        car,
+        car_model,
+        car_vin,
+        car_color,
+        car_model_year,
+        price: formattedPrice,
+        availability,
+    };
 
     updateCar(id, updatedCar);
   };
@@ -106,7 +110,7 @@ const EditForm = ({ theCar }) => {
       <Form.Group className="mb-2">
         <Form.Label>Price $</Form.Label>
         <Form.Control
-          type="text"
+          type="number"
           placeholder="Price"
           name="price"
           value={price}

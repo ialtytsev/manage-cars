@@ -47,6 +47,7 @@ const Pagination = ({ pages, setCurrentPage, currentCars, sortedCars }) => {
         </li>
       );
     }
+    
     for (let i = startPage; i <= endPage; i++) {
       pageNumbers.push(
         <li

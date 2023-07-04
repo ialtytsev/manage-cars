@@ -85,8 +85,8 @@ const AddForm = () => {
     }
 
     const formattedPrice = /^\d+$/.test(price)
-      ? "$" + parseFloat(price).toFixed(2)
-      : "$" + price;
+      ? parseFloat(price).toFixed(2)
+      : price;
 
     addCar(
       car,

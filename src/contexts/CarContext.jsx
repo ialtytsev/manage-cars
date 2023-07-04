@@ -2,7 +2,6 @@ import { createContext, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { getCars } from "../utils/api";
 
-const { confirm } = window;
 
 export const CarContext = createContext();
 
@@ -13,13 +12,17 @@ const CarContextProvider = (props) => {
     const fetchData = async () => {
       try {
         const data = await getCars();
-        setCars(data);
-        localStorage.setItem("cars", JSON.stringify(data));
+        const formattedData = data.map((car) => {
+          const formattedPrice = Number(car.price.replace("$", ""));
+          return { ...car, price: formattedPrice };
+        });
+        setCars(formattedData);
+        localStorage.setItem("cars", JSON.stringify(formattedData));
       } catch (error) {
         console.error(error);
       }
     };
-
+  
     const storedCars = JSON.parse(localStorage.getItem("cars"));
     if (storedCars) {
       setCars(storedCars);
@@ -27,8 +30,9 @@ const CarContextProvider = (props) => {
       fetchData();
     }
   }, []);
+  
 
-  const sortedCars = cars.sort((a, b) => (a.id < b.id ? -1 : 1));
+  const sortedCars = cars.sort((a, b) => (a.id - b.id));
 
   const addCar = (
     car,

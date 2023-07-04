@@ -26,7 +26,7 @@ const Car = ({ car }) => {
       <td>{car.car_vin}</td>
       <td>{car.car_color}</td>
       <td>{car.car_model_year}</td>
-      <td>{car.price}</td>
+      <td>{`$${car.price}`}</td>
       <td>{car.availability ? "Available" : "Not Available"}</td>
       <td>
         <Dropdown>

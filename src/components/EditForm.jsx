@@ -1,6 +1,6 @@
 import { Form, Button } from "react-bootstrap";
 import { CarContext } from "../contexts/CarContext";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 const EditForm = ({ theCar }) => {
   const id = theCar.id;
@@ -12,6 +12,12 @@ const EditForm = ({ theCar }) => {
   const [car_model_year, setCarModelYear] = useState(theCar.car_model_year);
   const [price, setPrice] = useState(theCar.price);
   const [availability, setAvailability] = useState(theCar.availability);
+
+  const firstInputRef = useRef(null);
+
+  useEffect(() => {
+    firstInputRef.current.focus();
+  }, []);
 
   const { updateCar } = useContext(CarContext);
 
@@ -78,6 +84,7 @@ const EditForm = ({ theCar }) => {
       <Form.Group className="mb-2">
         <Form.Label>Color</Form.Label>
         <Form.Control
+        ref={firstInputRef}
           type="text"
           placeholder="Car Color"
           name="car_color"

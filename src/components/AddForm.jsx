@@ -1,6 +1,6 @@
 import { Form, Button } from "react-bootstrap";
 import { CarContext } from "../contexts/CarContext";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 const AddForm = () => {
   const { addCar } = useContext(CarContext);
@@ -17,6 +17,12 @@ const AddForm = () => {
 
   const [vinError, setVinError] = useState("");
   const [yearError, setYearError] = useState("");
+
+  const firstInputRef = useRef(null); 
+
+  useEffect(() => {
+    firstInputRef.current.focus();
+  }, []);
 
   const onInputChange = (e) => {
     let value =
@@ -98,6 +104,7 @@ const AddForm = () => {
       <Form.Group className="mb-2">
         <Form.Label>Company</Form.Label>
         <Form.Control
+            ref={firstInputRef}
           type="text"
           placeholder="Enter Company"
           name="car"

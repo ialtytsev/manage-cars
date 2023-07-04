@@ -69,8 +69,7 @@ const CarList = () => {
           car.car_model.toLowerCase().includes(searchTerm) ||
           car.car_vin.toLowerCase().includes(searchTerm) ||
           car.car_color.toLowerCase().includes(searchTerm) ||
-          car.car_model_year.toString().includes(searchTerm) ||
-          car.car_price.toString().includes(searchTerm)) &&
+          car.car_model_year.toString().includes(searchTerm)) &&
         isAvailable
       );
     });

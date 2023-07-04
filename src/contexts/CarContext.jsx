@@ -32,7 +32,7 @@ const CarContextProvider = (props) => {
   }, []);
   
 
-  const sortedCars = cars.sort((a, b) => (a.id - b.id));
+  const sortedCars = cars.sort((a, b) => (a.id < b.id ? -1 : 1));
 
   const addCar = (
     car,

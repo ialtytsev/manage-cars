@@ -1,4 +1,4 @@
-import { Modal } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 import AddForm from "./AddForm";
 import EditForm from "./EditForm";
 
@@ -28,4 +28,21 @@ export const EditCarModal = ({ show, car, handleClose }) => {
   );
 };
 
-export default AddCarModal;
+export const DeleteModal = ({ show, handleClose, handleDelete }) => {
+    return (
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Deletion</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to delete this car?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={handleDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  };

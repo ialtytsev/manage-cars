@@ -115,9 +115,11 @@ const EditForm = ({ theCar }) => {
           onChange={(e) => setAvailability(e.target.checked)}
         />
       </Form.Group>
-      <Button variant="success" type="submit" block>
+      <div className="d-grid gap-2">
+      <Button variant="success" type="submit">
         Edit Car
       </Button>
+      </div>
     </Form>
   );
 };

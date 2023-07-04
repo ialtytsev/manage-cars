@@ -168,9 +168,11 @@ const AddForm = () => {
           onChange={onInputChange}
         />
       </Form.Group>
-      <Button variant="success" type="submit" block>
+      <div className="d-grid gap-2">
+      <Button variant="success" type="submit">
         Add New Car
       </Button>
+      </div>
     </Form>
   );
 };

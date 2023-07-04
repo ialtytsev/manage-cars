@@ -54,10 +54,6 @@ const CarContextProvider = (props) => {
   };
 
   const deleteCar = (id) => {
-    const confirmed = confirm("Are you sure you want to delete this car?");
-    if (!confirmed) {
-      return;
-    }
     const updatedCars = cars.filter((car) => car.id !== id);
     setCars(updatedCars);
     localStorage.setItem("cars", JSON.stringify(updatedCars));

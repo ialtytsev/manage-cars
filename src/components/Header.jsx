@@ -15,7 +15,7 @@ const Header = ({
   return (
     <div className="table-title">
       <div className="row">
-        <div className="col-sm-2 ">
+        <div className="d-flex justify-content-center col-sm-2 ">
           <a href="/">
           <img src={logo} alt="Logo" className="logo-image"/> 
           </a>
@@ -37,7 +37,7 @@ const Header = ({
             />
           </Form>
         </div>
-        <div className="offset-sm-1 col-sm-2 my-3">
+        <div className="d-flex justify-content-center offset-sm-1 col-sm-2 my-3">
           <Button
             onClick={handleShow}
             className="btn btn-success"

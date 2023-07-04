@@ -5,12 +5,12 @@ import Car from "./Car";
 import Pagination from "./Pagination";
 import Header from "./Header";
 import { AddCarModal } from "./Modals";
+import { useModal } from "../hooks/useModal";
 
 const CarList = () => {
   const { sortedCars } = useContext(CarContext);
 
   const [showAlert, setShowAlert] = useState(false);
-  const [show, setShow] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [carsPerPage] = useState(25);
   const [search, setSearch] = useState("");
@@ -24,16 +24,11 @@ const CarList = () => {
     }, 2000);
   };
 
-  const handleClose = () => {
-    setShow(false);
-  };
+  const { show: showAddModal, handleShow: handleShowAddModal, handleClose: handleCloseAddModal } = useModal();
 
-  const handleShow = () => {
-    setShow(true);
-  };
 
   useEffect(() => {
-    handleClose();
+    handleCloseAddModal();
     handleShowAlert();
   }, [sortedCars]);
 
@@ -64,7 +59,7 @@ const CarList = () => {
   return (
     <>
       <Header
-        handleShow={handleShow}
+        handleShow={handleShowAddModal}
         setSearch={setSearch}
         search={search}
         showAvailableOnly={showAvailableOnly}
@@ -108,7 +103,7 @@ const CarList = () => {
         sortedCars={sortedCars}
       />
 
-      <AddCarModal show={show} handleClose={handleClose} />
+      <AddCarModal show={showAddModal} handleClose={handleCloseAddModal} />
     </>
   );
 };

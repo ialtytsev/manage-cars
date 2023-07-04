@@ -1,18 +1,18 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { CarContext } from "../contexts/CarContext";
 import { Dropdown } from "react-bootstrap";
-import { EditCarModal } from "./Modals";
+import { EditCarModal, DeleteModal } from "./Modals";
+import { useModal } from "../hooks/useModal";
 
 const Car = ({ car }) => {
   const { deleteCar } = useContext(CarContext);
-
-  const [show, setShow] = useState(false);
-
-  const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
+  
+  const { show: showEditModal, handleShow: handleShowEditModal, handleClose: handleCloseEditModal } = useModal();
+  const { show: showDeleteModal, handleShow: handleShowDeleteModal, handleClose: handleCloseDeleteModal } = useModal();
 
   useEffect(() => {
-    handleClose();
+    handleCloseEditModal();
+    handleCloseDeleteModal();
   }, [car]);
 
   const handleDelete = (id) => {
@@ -35,15 +35,25 @@ const Car = ({ car }) => {
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            <Dropdown.Item onClick={handleShow}>Edit</Dropdown.Item>
-            <Dropdown.Item onClick={() => handleDelete(car.id)}>
+            <Dropdown.Item onClick={handleShowEditModal}>Edit</Dropdown.Item>
+            <Dropdown.Item onClick={handleShowDeleteModal}>
               Delete
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       </td>
 
-      <EditCarModal show={show} car={car} handleClose={handleClose} />
+      <EditCarModal
+        show={showEditModal}
+        car={car}
+        handleClose={handleCloseEditModal}
+      />
+
+      <DeleteModal
+        show={showDeleteModal}
+        handleClose={handleCloseDeleteModal}
+        handleDelete={() => handleDelete(car.id)}
+      />
     </>
   );
 };
